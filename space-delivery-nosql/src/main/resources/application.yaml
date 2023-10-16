@@ -1,0 +1,8 @@
+spring:
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/space-delivery
+  profiles:
+    active: dev
+server:
+  port: 8080
