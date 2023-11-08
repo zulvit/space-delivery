@@ -38,8 +38,6 @@ public class MissionParticipationServiceImpl implements MissionParticipationServ
     public MissionParticipation updateParticipation(String id, MissionParticipation participationDetails) {
         return missionParticipationRepository.findById(id)
                 .map(participation -> {
-                    participation.setMissionId(participationDetails.getMissionId());
-                    participation.setAstronautId(participationDetails.getAstronautId());
                     participation.setRole(participationDetails.getRole());
                     return missionParticipationRepository.save(participation);
                 }).orElseThrow(() -> new ResourceNotFoundException("Participation not found with id: " + id));

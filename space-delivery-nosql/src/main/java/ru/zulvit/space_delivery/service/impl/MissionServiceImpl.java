@@ -20,31 +20,37 @@ public class MissionServiceImpl implements MissionService {
         this.missionRepository = missionRepository;
     }
 
+    @Override
     public List<Mission> getAllMissions() {
         return missionRepository.findAll();
     }
 
+    @Override
     public Mission getMissionById(String id) {
         return missionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Mission not found with id " + id));
     }
 
+    @Override
     public Mission addMission(@NotNull Mission mission) {
+        // Assume that the Mission object already contains an embedded Rocket and Cargo object
         return missionRepository.save(mission);
     }
 
+    @Override
     public Mission updateMission(String id, @NotNull Mission missionDetails) {
-        Mission mission = getMissionById(id);
-        mission.setRocketId(missionDetails.getRocketId());
-        mission.setCargoId(missionDetails.getCargoId());
+        return missionRepository.findById(id)
+                .map(mission -> {
+                    mission.setLaunchDate(missionDetails.getLaunchDate());
+                    mission.setEstimatedArrivalDate(missionDetails.getEstimatedArrivalDate());
+                    mission.setActualArrivalDate(missionDetails.getActualArrivalDate());
+                    mission.setStatus(missionDetails.getStatus());
 
-        mission.setLaunchDate(missionDetails.getLaunchDate());
-        mission.setEstimatedArrivalDate(missionDetails.getEstimatedArrivalDate());
-        mission.setActualArrivalDate(missionDetails.getActualArrivalDate());
-        mission.setStatus(missionDetails.getStatus());
-        return missionRepository.save(mission);
+                    return missionRepository.save(mission);
+                }).orElseThrow(() -> new ResourceNotFoundException("Mission not found with id " + id));
     }
 
+    @Override
     public void deleteMission(String id) {
         Mission mission = getMissionById(id);
         missionRepository.delete(mission);
@@ -60,4 +66,3 @@ public class MissionServiceImpl implements MissionService {
         return missionRepository.findByLaunchDateAfter(date);
     }
 }
-
