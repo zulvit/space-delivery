@@ -41,16 +41,7 @@ public class MissionController {
 
     @PostMapping
     public ResponseEntity<MissionResponseDto> addMission(@RequestBody MissionRequestDto missionRequestDto) {
-        var rocket = rocketService.getRocketById(missionRequestDto.getRocketId());
-        var cargo = cargoService.getCargoById(missionRequestDto.getCargoId());
-
-        Mission mission = new Mission();
-        mission.setRocketId(rocket.getId());
-        mission.setCargoId(cargo.getId());
-        mission.setLaunchDate(missionRequestDto.getLaunchdate());
-        mission.setEstimatedArrivalDate(missionRequestDto.getEstimatedArrivalDate());
-        mission.setStatus(missionRequestDto.getStatus());
-
+        Mission mission = missionMapper.convertToEntityFromRequestDto(missionRequestDto);
         Mission created = missionService.addMission(mission);
         MissionResponseDto missionResponseDto = missionMapper.convertToResponseDto(created);
         return ResponseEntity.ok(missionResponseDto);
