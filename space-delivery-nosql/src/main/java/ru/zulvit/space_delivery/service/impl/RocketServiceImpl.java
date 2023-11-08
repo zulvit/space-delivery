@@ -23,7 +23,7 @@ public class RocketServiceImpl implements RocketService {
         return rocketRepository.findAll();
     }
 
-    public Rocket getRocketById(long id) {
+    public Rocket getRocketById(String id) {
         return rocketRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Rocket not found with id " + id));
     }
@@ -32,7 +32,7 @@ public class RocketServiceImpl implements RocketService {
         return rocketRepository.save(rocket);
     }
 
-    public Rocket updateRocket(long id, @NotNull Rocket rocketDetails) {
+    public Rocket updateRocket(String id, @NotNull Rocket rocketDetails) {
         Rocket rocket = getRocketById(id);
         rocket.setName(rocketDetails.getName());
         rocket.setManufacturer(rocketDetails.getManufacturer());
@@ -40,7 +40,7 @@ public class RocketServiceImpl implements RocketService {
         return rocketRepository.save(rocket);
     }
 
-    public void deleteRocket(long id) {
+    public void deleteRocket(String id) {
         Rocket rocket = getRocketById(id);
         rocketRepository.delete(rocket);
     }

@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class AstronautRequestDto {
-    String firstName;
-    String lastName;
-    String nationality;
-    String date;
-    int missionsParticipated;
+    private String firstName;
+    private String lastName;
+    private String nationality;
+    private String date;
+    private int missionsParticipated;
 }

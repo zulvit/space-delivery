@@ -4,7 +4,7 @@ import lombok.Data;
 
 @Data
 public class CargoResponseDto {
-    private long id;
+    private String id;
     private String description;
     private float weight;
     private String purpose;

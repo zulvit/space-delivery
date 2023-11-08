@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "rockets")
 public class Rocket {
     @Id
-    private long id;
+    private String id;
     @Field
     private String name;
     @Field

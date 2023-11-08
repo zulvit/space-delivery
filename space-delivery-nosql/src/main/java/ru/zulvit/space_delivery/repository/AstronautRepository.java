@@ -8,7 +8,7 @@ import ru.zulvit.space_delivery.model.Astronaut;
 import java.util.List;
 
 @Repository
-public interface AstronautRepository extends MongoRepository<Astronaut, Long> {
+public interface AstronautRepository extends MongoRepository<Astronaut, String> {
     Long countByNationality(String nationality);
 
     List<Astronaut> findByMissionsParticipatedGreaterThan(int missionCount);

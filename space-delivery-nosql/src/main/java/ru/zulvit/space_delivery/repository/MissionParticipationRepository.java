@@ -7,8 +7,8 @@ import ru.zulvit.space_delivery.model.MissionParticipation;
 import java.util.List;
 
 @Repository
-public interface MissionParticipationRepository extends MongoRepository<MissionParticipation, Long> {
+public interface MissionParticipationRepository extends MongoRepository<MissionParticipation, String> {
     List<MissionParticipation> findByRole(String role);
 
-    List<MissionParticipation> findByAstronautId(int astronautId);
+    List<MissionParticipation> findByAstronautId(String astronautId);
 }

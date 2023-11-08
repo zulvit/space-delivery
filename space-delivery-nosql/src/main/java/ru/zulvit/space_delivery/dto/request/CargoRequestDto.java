@@ -4,9 +4,9 @@ import lombok.Data;
 
 @Data
 public class CargoRequestDto {
-    String description;
-    float weight;
-    String purpose;
-    String departureDate;
-    String arrivalDate;
+    private String description;
+    private float weight;
+    private String purpose;
+    private String departureDate;
+    private String arrivalDate;
 }

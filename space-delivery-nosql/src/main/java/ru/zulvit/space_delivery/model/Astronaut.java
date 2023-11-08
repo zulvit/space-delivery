@@ -14,7 +14,7 @@ import java.util.List;
 @Document(collection = "astronauts")
 public class Astronaut {
     @Id
-    private long id;
+    private String id;
     @Field
     private String firstName;
     @Field

@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Repository
-public interface MissionRepository extends MongoRepository<Mission, Long> {
+public interface MissionRepository extends MongoRepository<Mission, String> {
     List<Mission> findByStatus(String status);
 
     List<Mission> findByLaunchDateAfter(Date date);

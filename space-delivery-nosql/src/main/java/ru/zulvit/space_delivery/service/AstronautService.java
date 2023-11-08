@@ -7,13 +7,13 @@ import java.util.List;
 public interface AstronautService {
     List<Astronaut> getAllAstronauts();
 
-    Astronaut getAstronautById(long id);
+    Astronaut getAstronautById(String id);
 
     Astronaut addAstronaut(Astronaut astronaut);
 
-    Astronaut updateAstronaut(long id, Astronaut astronautDetails);
+    Astronaut updateAstronaut(String id, Astronaut astronautDetails);
 
-    void deleteAstronaut(long id);
+    void deleteAstronaut(String id);
 
     Long countByNationality(String nationality);
 

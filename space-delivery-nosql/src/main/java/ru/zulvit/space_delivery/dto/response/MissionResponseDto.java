@@ -6,9 +6,9 @@ import java.util.Date;
 
 @Data
 public class MissionResponseDto {
-    private long id;
-    private long rocketId;
-    private long cargoId;
+    private String id;
+    private String rocketId;
+    private String cargoId;
     private Date launchDate;
     private Date estimatedArrivalDate;
     private String status;

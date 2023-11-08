@@ -33,7 +33,7 @@ public class CargoController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CargoResponseDto> getCargoById(@PathVariable long id) {
+    public ResponseEntity<CargoResponseDto> getCargoById(@PathVariable String id) {
         CargoResponseDto cargo = cargoMapper.convertToResponseDto(cargoService.getCargoById(id));
         return new ResponseEntity<>(cargo, HttpStatus.OK);
     }
@@ -45,13 +45,13 @@ public class CargoController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CargoResponseDto> updateCargo(@PathVariable long id, @RequestBody CargoRequestDto cargoDetailsDto) {
+    public ResponseEntity<CargoResponseDto> updateCargo(@PathVariable String id, @RequestBody CargoRequestDto cargoDetailsDto) {
         CargoResponseDto updatedCargo = cargoMapper.convertToResponseDto(cargoService.updateCargo(id, cargoMapper.convertToEntityFromRequestDto(cargoDetailsDto)));
         return new ResponseEntity<>(updatedCargo, HttpStatus.OK);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteCargo(@PathVariable long id) {
+    public ResponseEntity<?> deleteCargo(@PathVariable String id) {
         cargoService.deleteCargo(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }

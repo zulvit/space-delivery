@@ -9,13 +9,13 @@ import java.util.List;
 public interface MissionService {
     List<Mission> getAllMissions();
 
-    Mission getMissionById(long id);
+    Mission getMissionById(String id);
 
     Mission addMission(Mission mission);
 
-    Mission updateMission(long id, Mission missionDetails);
+    Mission updateMission(String id, Mission missionDetails);
 
-    void deleteMission(long id);
+    void deleteMission(String id);
 
     List<Mission> findByStatus(String status);
 

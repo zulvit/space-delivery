@@ -23,7 +23,7 @@ public class CargoServiceImpl implements CargoService {
         return cargoRepository.findAll();
     }
 
-    public Cargo getCargoById(long id) {
+    public Cargo getCargoById(String id) {
         return cargoRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cargo not found with id " + id));
     }
@@ -32,7 +32,7 @@ public class CargoServiceImpl implements CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public Cargo updateCargo(long id, @NotNull Cargo cargoDetails) {
+    public Cargo updateCargo(String id, @NotNull Cargo cargoDetails) {
         Cargo cargo = getCargoById(id);
         cargo.setDescription(cargoDetails.getDescription());
         cargo.setWeight(cargoDetails.getWeight());
@@ -40,7 +40,7 @@ public class CargoServiceImpl implements CargoService {
         return cargoRepository.save(cargo);
     }
 
-    public void deleteCargo(long id) {
+    public void deleteCargo(String id) {
         Cargo cargo = getCargoById(id);
         cargoRepository.delete(cargo);
     }

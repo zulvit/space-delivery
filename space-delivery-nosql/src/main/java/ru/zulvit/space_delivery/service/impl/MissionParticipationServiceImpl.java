@@ -24,7 +24,7 @@ public class MissionParticipationServiceImpl implements MissionParticipationServ
     }
 
     @Override
-    public MissionParticipation getParticipationById(long id) {
+    public MissionParticipation getParticipationById(String id) {
         return missionParticipationRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Participation not found with id: " + id));
     }
@@ -35,7 +35,7 @@ public class MissionParticipationServiceImpl implements MissionParticipationServ
     }
 
     @Override
-    public MissionParticipation updateParticipation(long id, MissionParticipation participationDetails) {
+    public MissionParticipation updateParticipation(String id, MissionParticipation participationDetails) {
         return missionParticipationRepository.findById(id)
                 .map(participation -> {
                     participation.setMissionId(participationDetails.getMissionId());
@@ -46,7 +46,7 @@ public class MissionParticipationServiceImpl implements MissionParticipationServ
     }
 
     @Override
-    public void deleteParticipation(long id) {
+    public void deleteParticipation(String id) {
         if (missionParticipationRepository.existsById(id)) {
             missionParticipationRepository.deleteById(id);
         } else {
@@ -60,7 +60,7 @@ public class MissionParticipationServiceImpl implements MissionParticipationServ
     }
 
     @Override
-    public List<MissionParticipation> findByAstronautId(int astronautId) {
+    public List<MissionParticipation> findByAstronautId(String astronautId) {
         return missionParticipationRepository.findByAstronautId(astronautId);
     }
 }

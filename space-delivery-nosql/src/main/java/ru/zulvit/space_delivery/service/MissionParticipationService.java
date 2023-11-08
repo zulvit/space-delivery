@@ -7,15 +7,15 @@ import java.util.List;
 public interface MissionParticipationService {
     List<MissionParticipation> getAllParticipation();
 
-    MissionParticipation getParticipationById(long id);
+    MissionParticipation getParticipationById(String id);
 
     MissionParticipation addParticipation(MissionParticipation participation);
 
-    MissionParticipation updateParticipation(long id, MissionParticipation participationDetails);
+    MissionParticipation updateParticipation(String id, MissionParticipation participationDetails);
 
-    void deleteParticipation(long id);
+    void deleteParticipation(String id);
 
     List<MissionParticipation> findByRole(String role);
 
-    List<MissionParticipation> findByAstronautId(int astronautId);
+    List<MissionParticipation> findByAstronautId(String astronautId);
 }

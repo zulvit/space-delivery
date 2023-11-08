@@ -34,7 +34,7 @@ public class MissionParticipationController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<MissionParticipationResponseDto> getParticipationById(@PathVariable long id) {
+    public ResponseEntity<MissionParticipationResponseDto> getParticipationById(@PathVariable String id) {
         MissionParticipationResponseDto participationDto = mapper.entityToResponseDto(missionParticipationService.getParticipationById(id));
         return ResponseEntity.ok(participationDto);
     }
@@ -47,14 +47,14 @@ public class MissionParticipationController {
 
 
     @PutMapping("/{id}")
-    public ResponseEntity<MissionParticipationResponseDto> updateParticipation(@PathVariable long id, @RequestBody MissionParticipationRequestDto participationDto) {
+    public ResponseEntity<MissionParticipationResponseDto> updateParticipation(@PathVariable String id, @RequestBody MissionParticipationRequestDto participationDto) {
         MissionParticipation updated = missionParticipationService.updateParticipation(id, mapper.requestDtoToEntity(participationDto));
         return ResponseEntity.ok(mapper.entityToResponseDto(updated));
     }
 
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteParticipation(@PathVariable long id) {
+    public ResponseEntity<?> deleteParticipation(@PathVariable String id) {
         missionParticipationService.deleteParticipation(id);
         return ResponseEntity.noContent().build();
     }
@@ -68,7 +68,7 @@ public class MissionParticipationController {
     }
 
     @GetMapping("/astronaut/{astronautId}")
-    public ResponseEntity<List<MissionParticipationResponseDto>> findByAstronautId(@PathVariable int astronautId) {
+    public ResponseEntity<List<MissionParticipationResponseDto>> findByAstronautId(@PathVariable String astronautId) {
         List<MissionParticipationResponseDto> participations = missionParticipationService.findByAstronautId(astronautId).stream()
                 .map(mapper::entityToResponseDto)
                 .collect(Collectors.toList());

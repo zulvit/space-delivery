@@ -7,7 +7,7 @@ import ru.zulvit.space_delivery.model.Rocket;
 import java.util.List;
 
 @Repository
-public interface RocketRepository extends MongoRepository<Rocket, Long> {
+public interface RocketRepository extends MongoRepository<Rocket, String> {
     List<Rocket> findByManufacturer(String manufacturer);
 
     List<Rocket> findByMaxLoadGreaterThan(float load);

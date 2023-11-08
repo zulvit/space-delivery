@@ -11,7 +11,7 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "mission_participations")
 public class MissionParticipation {
     @Id
-    private long id;
+    private String id;
     @Field
     private long missionId;
     @Field

@@ -7,13 +7,13 @@ import java.util.List;
 public interface RocketService {
     List<Rocket> getAllRockets();
 
-    Rocket getRocketById(long id);
+    Rocket getRocketById(String id);
 
     Rocket addRocket(Rocket rocket);
 
-    Rocket updateRocket(long id, Rocket rocketDetails);
+    Rocket updateRocket(String id, Rocket rocketDetails);
 
-    void deleteRocket(long id);
+    void deleteRocket(String id);
 
     List<Rocket> findByManufacturer(String manufacturer);
 

@@ -7,6 +7,6 @@ import ru.zulvit.space_delivery.model.Cargo;
 import java.util.List;
 
 @Repository
-public interface CargoRepository extends MongoRepository<Cargo, Long> {
+public interface CargoRepository extends MongoRepository<Cargo, String> {
     List<Cargo> findByWeightGreaterThan(float weight);
 }

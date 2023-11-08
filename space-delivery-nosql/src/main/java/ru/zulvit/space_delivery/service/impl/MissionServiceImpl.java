@@ -24,7 +24,7 @@ public class MissionServiceImpl implements MissionService {
         return missionRepository.findAll();
     }
 
-    public Mission getMissionById(long id) {
+    public Mission getMissionById(String id) {
         return missionRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Mission not found with id " + id));
     }
@@ -33,7 +33,7 @@ public class MissionServiceImpl implements MissionService {
         return missionRepository.save(mission);
     }
 
-    public Mission updateMission(long id, @NotNull Mission missionDetails) {
+    public Mission updateMission(String id, @NotNull Mission missionDetails) {
         Mission mission = getMissionById(id);
         mission.setRocketId(missionDetails.getRocketId());
         mission.setCargoId(missionDetails.getCargoId());
@@ -45,7 +45,7 @@ public class MissionServiceImpl implements MissionService {
         return missionRepository.save(mission);
     }
 
-    public void deleteMission(long id) {
+    public void deleteMission(String id) {
         Mission mission = getMissionById(id);
         missionRepository.delete(mission);
     }

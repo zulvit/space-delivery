@@ -34,7 +34,7 @@ public class RocketController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<RocketResponseDto> getRocketById(@PathVariable Long id) {
+    public ResponseEntity<RocketResponseDto> getRocketById(@PathVariable String id) {
         RocketResponseDto rocketResponseDto = rocketMapper.convertToResponseDto(rocketService.getRocketById(id));
         return ResponseEntity.ok(rocketResponseDto);
     }
@@ -46,13 +46,13 @@ public class RocketController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<RocketResponseDto> updateRocket(@PathVariable Long id, @RequestBody RocketRequestDto rocketRequestDto) {
+    public ResponseEntity<RocketResponseDto> updateRocket(@PathVariable String id, @RequestBody RocketRequestDto rocketRequestDto) {
         Rocket updated = rocketService.updateRocket(id, rocketMapper.convertToEntityFromRequestDto(rocketRequestDto));
         return ResponseEntity.ok(rocketMapper.convertToResponseDto(updated));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteRocket(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteRocket(@PathVariable String id) {
         rocketService.deleteRocket(id);
         return ResponseEntity.noContent().build();
     }

@@ -15,11 +15,11 @@ import java.util.List;
 @Document
 public class Mission {
     @Id
-    private long id;
+    private String id;
     @Field
-    private long rocketId;
+    private String rocketId;
     @Field
-    private long cargoId;
+    private String cargoId;
     @Field
     private Date launchDate;
     @Field

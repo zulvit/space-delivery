@@ -1,6 +1,7 @@
 package ru.zulvit.space_delivery.service.impl;
 
 import lombok.extern.log4j.Log4j2;
+import org.bson.types.ObjectId;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -27,18 +28,19 @@ public class AstronautServiceImpl implements AstronautService {
     }
 
     @Override
-    public Astronaut getAstronautById(long id) {
+    public Astronaut getAstronautById(String id) {
         return astronautRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Astronaut not found with id " + id));
     }
 
     @Override
     public Astronaut addAstronaut(@NotNull Astronaut astronaut) {
+        astronaut.setId(ObjectId.get().toHexString());
         return astronautRepository.save(astronaut);
     }
 
     @Override
-    public Astronaut updateAstronaut(long id, @NotNull Astronaut astronautDetails) {
+    public Astronaut updateAstronaut(String id, @NotNull Astronaut astronautDetails) {
         Astronaut astronaut = getAstronautById(id);
         astronaut.setFirstName(astronautDetails.getFirstName());
         astronaut.setLastName(astronautDetails.getLastName());
@@ -49,7 +51,7 @@ public class AstronautServiceImpl implements AstronautService {
     }
 
     @Override
-    public void deleteAstronaut(long id) {
+    public void deleteAstronaut(String id) {
         Astronaut astronaut = getAstronautById(id);
         astronautRepository.delete(astronaut);
     }

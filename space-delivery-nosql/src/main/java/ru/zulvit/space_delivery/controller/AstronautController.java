@@ -32,7 +32,7 @@ public class AstronautController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<AstronautResponseDto> getAstronautById(@PathVariable Long id) {
+    public ResponseEntity<AstronautResponseDto> getAstronautById(@PathVariable String id) {
         AstronautResponseDto astronaut = astronautMapper.convertToResponseDto(astronautService.getAstronautById(id));
         return ResponseEntity.ok(astronaut);
     }
@@ -44,13 +44,13 @@ public class AstronautController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<AstronautResponseDto> updateAstronaut(@PathVariable Long id, @RequestBody AstronautRequestDto astronautRequestDto) {
+    public ResponseEntity<AstronautResponseDto> updateAstronaut(@PathVariable String id, @RequestBody AstronautRequestDto astronautRequestDto) {
         AstronautResponseDto updated = astronautMapper.convertToResponseDto(astronautService.updateAstronaut(id, astronautMapper.convertToEntityFromRequestDto(astronautRequestDto)));
         return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteAstronaut(@PathVariable Long id) {
+    public ResponseEntity<?> deleteAstronaut(@PathVariable String id) {
         astronautService.deleteAstronaut(id);
         return ResponseEntity.noContent().build();
     }

@@ -7,13 +7,13 @@ import java.util.List;
 public interface CargoService {
     List<Cargo> getAllCargoes();
 
-    Cargo getCargoById(long id);
+    Cargo getCargoById(String id);
 
     Cargo addCargo(Cargo cargo);
 
-    Cargo updateCargo(long id, Cargo cargoDetails);
+    Cargo updateCargo(String id, Cargo cargoDetails);
 
-    void deleteCargo(long id);
+    void deleteCargo(String id);
 
     List<Cargo> findByWeightGreaterThan(float weight);
 }

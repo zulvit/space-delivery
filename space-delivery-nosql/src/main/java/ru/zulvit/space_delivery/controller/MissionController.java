@@ -57,20 +57,20 @@ public class MissionController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MissionResponseDto> updateMission(@PathVariable Long id, @RequestBody MissionRequestDto missionDetailsDto) {
+    public ResponseEntity<MissionResponseDto> updateMission(@PathVariable String id, @RequestBody MissionRequestDto missionDetailsDto) {
         Mission missionDetails = missionMapper.convertToEntityFromRequestDto(missionDetailsDto);
         Mission updated = missionService.updateMission(id, missionDetails);
         return ResponseEntity.ok(missionMapper.convertToResponseDto(updated));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<?> deleteMission(@PathVariable Long id) {
+    public ResponseEntity<?> deleteMission(@PathVariable String id) {
         missionService.deleteMission(id);
         return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Mission> getMissionById(@PathVariable(value = "id") Long missionId) {
+    public ResponseEntity<Mission> getMissionById(@PathVariable(value = "id") String missionId) {
         Mission mission = missionService.getMissionById(missionId);
         return ResponseEntity.ok().body(mission);
     }
