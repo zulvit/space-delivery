@@ -4,49 +4,42 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.zulvit.space_delivery.dto.request.CargoRequestDto;
-import ru.zulvit.space_delivery.dto.response.CargoResponseDto;
-import ru.zulvit.space_delivery.mappers.CargoMapper;
+import ru.zulvit.space_delivery.model.Cargo;
 import ru.zulvit.space_delivery.service.CargoService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/cargoes")
 public class CargoController {
     private final CargoService cargoService;
-    private final CargoMapper cargoMapper;
 
     @Autowired
-    public CargoController(CargoService cargoService, CargoMapper cargoMapper) {
+    public CargoController(CargoService cargoService) {
         this.cargoService = cargoService;
-        this.cargoMapper = cargoMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<CargoResponseDto>> getAllCargoes() {
-        List<CargoResponseDto> cargoes = cargoService.getAllCargoes().stream()
-                .map(cargoMapper::convertToResponseDto)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<Cargo>> getAllCargoes() {
+        List<Cargo> cargoes = cargoService.getAllCargoes();
         return new ResponseEntity<>(cargoes, HttpStatus.OK);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CargoResponseDto> getCargoById(@PathVariable String id) {
-        CargoResponseDto cargo = cargoMapper.convertToResponseDto(cargoService.getCargoById(id));
+    public ResponseEntity<Cargo> getCargoById(@PathVariable String id) {
+        Cargo cargo = cargoService.getCargoById(id);
         return new ResponseEntity<>(cargo, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<CargoResponseDto> addCargo(@RequestBody CargoRequestDto cargoRequestDto) {
-        CargoResponseDto newCargo = cargoMapper.convertToResponseDto(cargoService.addCargo(cargoMapper.convertToEntityFromRequestDto(cargoRequestDto)));
+    public ResponseEntity<Cargo> addCargo(@RequestBody Cargo cargo) {
+        Cargo newCargo = cargoService.addCargo(cargo);
         return new ResponseEntity<>(newCargo, HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<CargoResponseDto> updateCargo(@PathVariable String id, @RequestBody CargoRequestDto cargoDetailsDto) {
-        CargoResponseDto updatedCargo = cargoMapper.convertToResponseDto(cargoService.updateCargo(id, cargoMapper.convertToEntityFromRequestDto(cargoDetailsDto)));
+    public ResponseEntity<Cargo> updateCargo(@PathVariable String id, @RequestBody Cargo cargoDetails) {
+        Cargo updatedCargo = cargoService.updateCargo(id, cargoDetails);
         return new ResponseEntity<>(updatedCargo, HttpStatus.OK);
     }
 
@@ -57,10 +50,8 @@ public class CargoController {
     }
 
     @GetMapping("/weight/{weight}")
-    public ResponseEntity<List<CargoResponseDto>> findByWeightGreaterThan(@PathVariable float weight) {
-        List<CargoResponseDto> cargos = cargoService.findByWeightGreaterThan(weight).stream()
-                .map(cargoMapper::convertToResponseDto)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<Cargo>> findByWeightGreaterThan(@PathVariable float weight) {
+        List<Cargo> cargos = cargoService.findByWeightGreaterThan(weight);
         return ResponseEntity.ok(cargos);
     }
 }

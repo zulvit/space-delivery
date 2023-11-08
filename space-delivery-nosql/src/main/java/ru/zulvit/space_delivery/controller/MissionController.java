@@ -4,54 +4,37 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.zulvit.space_delivery.dto.request.MissionRequestDto;
-import ru.zulvit.space_delivery.dto.response.MissionResponseDto;
-import ru.zulvit.space_delivery.mappers.MissionMapper;
 import ru.zulvit.space_delivery.model.Mission;
-import ru.zulvit.space_delivery.service.CargoService;
 import ru.zulvit.space_delivery.service.MissionService;
-import ru.zulvit.space_delivery.service.RocketService;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/missions")
 public class MissionController {
     private final MissionService missionService;
-    private final RocketService rocketService;
-    private final CargoService cargoService;
-    private final MissionMapper missionMapper;
 
     @Autowired
-    public MissionController(MissionService missionService, RocketService rocketService, CargoService cargoService, MissionMapper missionMapper) {
+    public MissionController(MissionService missionService) {
         this.missionService = missionService;
-        this.rocketService = rocketService;
-        this.cargoService = cargoService;
-        this.missionMapper = missionMapper;
     }
 
     @GetMapping
-    public ResponseEntity<List<MissionResponseDto>> getAllMissions() {
-        List<MissionResponseDto> missions = missionService.getAllMissions().stream()
-                .map(missionMapper::convertToResponseDto)
-                .collect(Collectors.toList());
+    public ResponseEntity<List<Mission>> getAllMissions() {
+        List<Mission> missions = missionService.getAllMissions();
         return new ResponseEntity<>(missions, HttpStatus.OK);
     }
 
     @PostMapping
-    public ResponseEntity<MissionResponseDto> addMission(@RequestBody MissionRequestDto missionRequestDto) {
-        Mission mission = missionMapper.convertToEntityFromRequestDto(missionRequestDto);
+    public ResponseEntity<Mission> addMission(@RequestBody Mission mission) {
         Mission created = missionService.addMission(mission);
-        MissionResponseDto missionResponseDto = missionMapper.convertToResponseDto(created);
-        return ResponseEntity.ok(missionResponseDto);
+        return ResponseEntity.ok(created);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<MissionResponseDto> updateMission(@PathVariable String id, @RequestBody MissionRequestDto missionDetailsDto) {
-        Mission missionDetails = missionMapper.convertToEntityFromRequestDto(missionDetailsDto);
+    public ResponseEntity<Mission> updateMission(@PathVariable String id, @RequestBody Mission missionDetails) {
         Mission updated = missionService.updateMission(id, missionDetails);
-        return ResponseEntity.ok(missionMapper.convertToResponseDto(updated));
+        return ResponseEntity.ok(updated);
     }
 
     @DeleteMapping("/{id}")
@@ -63,11 +46,12 @@ public class MissionController {
     @GetMapping("/{id}")
     public ResponseEntity<Mission> getMissionById(@PathVariable(value = "id") String missionId) {
         Mission mission = missionService.getMissionById(missionId);
-        return ResponseEntity.ok().body(mission);
+        return ResponseEntity.ok(mission);
     }
 
     @GetMapping("/status/{status}")
-    public List<Mission> getMissionsByStatus(@PathVariable(value = "status") String status) {
-        return missionService.findByStatus(status);
+    public ResponseEntity<List<Mission>> getMissionsByStatus(@PathVariable(value = "status") String status) {
+        List<Mission> missions = missionService.findByStatus(status);
+        return ResponseEntity.ok(missions);
     }
 }
