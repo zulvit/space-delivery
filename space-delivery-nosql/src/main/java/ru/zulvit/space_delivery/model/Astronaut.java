@@ -1,30 +1,28 @@
 package ru.zulvit.space_delivery.model;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
-import org.springframework.data.mongodb.core.mapping.Field;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
 @Document(collection = "astronauts")
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Astronaut {
     @Id
     private String id;
-    @Field
     private String firstName;
-    @Field
     private String lastName;
-    @Field
     private String nationality;
-    @Field
     private Date birthDate;
-    @Field
     private int missionsParticipated;
-    @Field
-    private List<MissionParticipation> missionParticipation;
+
+    private List<MissionParticipation> missionParticipations;
 }
