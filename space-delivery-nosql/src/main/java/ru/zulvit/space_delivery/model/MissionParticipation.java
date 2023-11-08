@@ -1,14 +1,17 @@
 package ru.zulvit.space_delivery.model;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Getter
-@Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@Data
+@Document(collection = "mission_participations")
 public class MissionParticipation {
+    @Id
+    private String id;
+    private String missionId;
+    private String astronautId;
     private String role;
 }
