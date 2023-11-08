@@ -1,6 +1,5 @@
 package ru.zulvit.space_delivery.model;
 
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
@@ -15,7 +14,7 @@ import java.util.List;
 @Document(collection = "astronauts")
 public class Astronaut {
     @Id
-    private String id;
+    private long id;
     @Field
     private String firstName;
     @Field
@@ -25,7 +24,7 @@ public class Astronaut {
     @Field
     private Date birthDate;
     @Field
-    private int missionParticipated;
+    private int missionsParticipated;
     @Field
     private List<MissionParticipation> missionParticipation;
 }

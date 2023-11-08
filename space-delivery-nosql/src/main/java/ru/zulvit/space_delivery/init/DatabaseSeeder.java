@@ -30,7 +30,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         astronaut.setNationality("EN");
         astronaut.setFirstName("Migel");
         astronaut.setLastName("Testik");
-        astronaut.setMissionParticipated(1);
+        astronaut.setMissionsParticipated(1);
         astronautRepository.save(astronaut);
 
         Mission mission = new Mission();

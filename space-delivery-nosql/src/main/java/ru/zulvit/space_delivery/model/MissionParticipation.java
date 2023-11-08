@@ -11,11 +11,11 @@ import org.springframework.data.mongodb.core.mapping.Field;
 @Document(collection = "mission_participations")
 public class MissionParticipation {
     @Id
-    private String id;
+    private long id;
     @Field
-    private String missionId;
+    private long missionId;
     @Field
-    private String astronautId;
+    private long astronautId;
     @Field
     private String role;
 }

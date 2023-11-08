@@ -13,7 +13,7 @@ import java.util.Date;
 @Document(collection = "cargoes")
 public class Cargo {
     @Id
-    private String id;
+    private long id;
     @Field
     private String description;
     @Field
