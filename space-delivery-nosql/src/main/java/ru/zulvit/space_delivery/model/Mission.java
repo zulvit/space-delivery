@@ -1,6 +1,8 @@
 package ru.zulvit.space_delivery.model;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,6 +11,8 @@ import java.util.List;
 
 @Document(collection = "missions")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Mission {
     @Id
     private String id;
