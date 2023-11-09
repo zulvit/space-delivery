@@ -6,10 +6,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Document(collection = "cargoes")
-@Data
 public class Cargo {
     @Id
     private String id;

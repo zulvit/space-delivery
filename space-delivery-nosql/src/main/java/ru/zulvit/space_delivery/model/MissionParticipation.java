@@ -4,9 +4,9 @@ import lombok.*;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
 @Document(collection = "mission_participations")
 public class MissionParticipation {
     @Id

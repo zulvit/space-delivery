@@ -8,10 +8,10 @@ import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
 
-@Document(collection = "astronauts")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Document(collection = "astronauts")
 public class Astronaut {
     @Id
     private String id;
@@ -21,3 +21,5 @@ public class Astronaut {
     private Date birthDate;
     private int missionsParticipated;
 }
+
+
